@@ -1,0 +1,20 @@
+<h1 style="padding-bottom: 10px;">Orders</h1>
+<div *ngFor="let item of propertyValues let i = index" [attr.data-index]="i">
+    <app-zippy *ngIf="!item['isArchived']" title="{{(item.firstName + ' ' + item.lastName) | uppercase}}{{' ('+i+')'}}">
+        <h3>Items</h3>
+        <ul *ngFor="let ingredient of item['ingredients']">
+            <li>{{ingredient.name + '(' + ingredient.amount + ')'}}</li>
+        </ul>
+        <p>
+            Ordered on: {{item['date']}}
+        </p>
+        <p>
+            Address: {{item['streetAddress1']}}, {{item['streetAddress2']}}, {{item['city']}}, {{item['postalCode']}},
+            {{item['state']}}
+        </p>
+        <p>
+            Contact number: {{item['phoneNumber']}}
+        </p>
+        <button mat-raised-button color="primary" (click)="toArchive(i)">Move to Archive</button>
+    </app-zippy>
+</div>

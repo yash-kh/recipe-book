@@ -1,0 +1,100 @@
+<div *ngIf='!show' class="container pt-4">
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Order Details</h1>
+            <div>
+                <ul class="list-group">
+                    <a class="list-group-item" style="cursor: pointer" *ngFor="let ingredient of ingredients; let i = index">
+                      {{ ingredient.name }} ({{ ingredient.amount }})
+                    </a>
+                </ul>
+            </div>
+            <hr class="mt-1">
+        </div>
+        <div class="col-12" style="margin:10px">
+            <form #orderForm="ngForm">
+                <div class="row mx-4" style="margin-bottom: 10px;">
+                    <div class="col-12 mb-2">
+                        <label class="order-form-label">Name</label>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <input class="order-form-input" minlength="4" maxlength="20" required placeholder="First" ngModel name="firstName" #firstName='ngModel'>
+                    </div>
+                    <div class="col-12 col-sm-6 mt-2 mt-sm-0">
+                        <input class="order-form-input" minlength="4" maxlength="20" required placeholder="Last" ngModel name="lastName" #lastName='ngModel'>
+                    </div>
+                </div>
+                <div *ngIf="firstName.touched && !firstName.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="firstName.errors.required">First Name is Required !!</div>
+                    <div *ngIf="firstName.errors.minlength">First Name must be of 4 character !!</div>
+                </div>
+                <div *ngIf="lastName.touched && !lastName.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="lastName.errors.required">Last Name is Required !!</div>
+                    <div *ngIf="lastName.errors.minlength">Last Name must be of 4 character !!</div>
+                </div>
+
+                <div class="row mt-3 mx-4" style="margin-bottom: 10px;">
+                    <div class="col-12">
+                        <label class="order-form-label">Address</label>
+                    </div>
+                    <div class="col-12 px5-marg">
+                        <input class="order-form-input" required placeholder="Street Address" ngModel name="streetAddress1" #streetAddress1='ngModel'>
+                    </div>
+                    <div class="col-12 mt-2 px5-marg">
+                        <input class="order-form-input" required placeholder="Street Address Line 2" ngModel name="streetAddress2" #streetAddress2='ngModel'>
+                    </div>
+                    <div class="col-12 col-sm-6 mt-2 pr-sm-2 px5-marg">
+                        <input class="order-form-input" required placeholder="City" ngModel name="city" #city='ngModel'>
+                    </div>
+                    <div class="col-12 col-sm-6 mt-2 pl-sm-0 px5-marg">
+                        <input class="order-form-input" required placeholder="State" ngModel name="state" #state='ngModel'>
+                    </div>
+                    <div class="col-12 col-sm-6 mt-2 pr-sm-2 px5-marg">
+                        <input class="order-form-input" required type="number" placeholder="Postal / Zip Code" ngModel name="postalCode" #postalCode='ngModel'>
+                    </div>
+                </div>
+                <div *ngIf="streetAddress1.touched && !streetAddress1.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="streetAddress1.errors.required">Street Address is Required !!</div>
+                </div>
+                <div *ngIf="streetAddress2.touched && !streetAddress2.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="streetAddress2.errors.required">Street Address 2 is Required !!</div>
+                </div>
+                <div *ngIf="city.touched && !city.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="city.errors.required">City is Required !!</div>
+                </div>
+                <div *ngIf="state.touched && !state.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="state.errors.required">State is Required !!</div>
+                </div>
+                <div *ngIf="postalCode.touched && !postalCode.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="postalCode.errors.required">Postal / Zip Code is Required !!</div>
+                </div>
+                <div class="row mx-4" style="margin-bottom: 10px;">
+                    <div class="col-12 mb-2">
+                        <label class="order-form-label">Contact Number</label>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <input class="order-form-input" minlength="10" maxlength="10" required placeholder="Phone number" ngModel name="phoneNumber" #phoneNumber='ngModel'>
+                    </div>
+                </div>
+                <div *ngIf="phoneNumber.touched && !phoneNumber.valid" class="alert alert-danger" role="alert">
+                    <div *ngIf="phoneNumber.errors.required">Contact Number is Required !!</div>
+                    <div *ngIf="phoneNumber.errors.minlength">Contact Number should be of 10 character !!</div>
+                </div>
+            </form>
+
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button type="button" [disabled]="!orderForm.valid" id="btnSubmit" class="btn btn-primary" (click)='submitOrder(orderForm.value)'>Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="show">
+    <img src="./assets/images/doubleTick.png">
+    <div class="float_center">
+        <h1 class="child" style="color: #ff0080;">Order Placed Successfully</h1>
+        <p class="child"> Our team will contact you soon with confirmation</p>
+    </div>
+</div>
